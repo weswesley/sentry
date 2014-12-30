@@ -10,9 +10,15 @@ use Illuminate\Database\Migrations\Migration;
 class CreateSentryUserRolesTable extends Migration {
 
 	public function up() {
+
 		Schema::create('sentry_user_roles', function($table) {
+
+			$table->integer('user_id');
+			$table->string('role', 32);
+
 			$table->primary(['user_id', 'role']);
 		});
+
 	}
 
 	public function down() {
