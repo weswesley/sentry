@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 /vendor
 composer.phar
 composer.lock
 .DS_Store
 .travis.yml
-
-=======
 /bootstrap/compiled.php
 .env.*.php
 .env.php
-/vendor
-composer.lock
 .idea
->>>>>>> ec33ad76abecf5bcb2d76696f9066ea623a9b9d2
