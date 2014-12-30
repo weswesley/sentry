@@ -16,6 +16,9 @@
     "satooshi/php-coveralls": "0.7.*@dev"
   },
   "autoload": {
+    "classmap": [
+      "src/migrations"
+    ],
     "psr-4": {
       "WesleyAlmeida\\Sentry\\": ["src/","test/src/"]
     }
