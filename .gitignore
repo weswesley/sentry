@@ -3,3 +3,5 @@
 .env.php
 /vendor
 composer.lock
+.idea
+.gitignore
