@@ -21,7 +21,6 @@ class SentryServiceProvider extends ServiceProvider {
 	{
 		$this->package('wesleyalmeida/sentry');
 
-		//include __DIR__ . '/../../config/sentry.php';
 	}
 
 	/**
