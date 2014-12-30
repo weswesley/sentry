@@ -1,0 +1,23 @@
+{
+  "name": "wesleyalmeida/Sentry",
+  "description": "Simple Laravel Resource Access Control",
+  "authors": [
+    {
+      "name": "Wes Almeida",
+      "email": "wes@tera-tech.net"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "satooshi/php-coveralls": "0.7.*@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "WesleyAlmeida\\Sentry\\": ["src/","test/src/"]
+    }
+  }
+}
