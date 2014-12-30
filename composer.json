@@ -1,6 +1,8 @@
 {
     "name": "wesleyalmeida/sentry",
     "description": "Simple Laravel Resource Access Control",
+    "keywords": ["access control", "laravel", "basic", "acl", "rbac"],
+    "type": "package",
     "authors": [
         {
             "name": "Wes Almeida",
@@ -15,7 +17,7 @@
             "src/migrations"
         ],
         "psr-4": {
-            "wesleyalmeida\\Sentry\\": ["src/","test/src/"]
+            "Wesleyalmeida\\Sentry\\": ["src/Wesleyalmeida/Sentry","tests"]
         }
     },
     "minimum-stability": "stable"

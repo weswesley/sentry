@@ -1,6 +1,7 @@
 <?php namespace Wesleyalmeida\Sentry;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
 class SentryServiceProvider extends ServiceProvider {
 
@@ -19,6 +20,8 @@ class SentryServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('wesleyalmeida/sentry');
+
+		//include __DIR__ . '/../../config/sentry.php';
 	}
 
 	/**
@@ -28,7 +31,10 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app['sentry'] = $this->app->share(function($app)
+		{
+			return new Sentry;
+		});
 	}
 
 	/**
