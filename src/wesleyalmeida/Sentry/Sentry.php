@@ -12,18 +12,6 @@ class Sentry {
 
     protected $user_roles = array();
 
-    static public function make($user_roles) {
-
-        return new Sentry($user_roles);
-    }
-
-    public function __construct($user_roles) {
-
-        foreach($user_roles as $role) {
-            $this->user_roles[] = strtolower($role);
-        }
-    }
-
     public function hasRole($role) {
 
         $role = strtolower($role);
@@ -108,6 +96,16 @@ class Sentry {
 
         return $this->disallow($property);
 
+    }
+
+    public function setUserRoles($user_roles) {
+        if(!is_array($user_roles)) {
+            throw new \Exception("Invalid user roles. Sentry requires an array.");
+        }
+
+        foreach($user_roles as $role) {
+            $this->user_roles[] = strtolower($role);
+        }
     }
 
 
