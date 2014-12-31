@@ -32,15 +32,11 @@ class SentryServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
-		App::bind('sentry', function($app, $user_roles) {
+		App::bindShared('sentry', function($app, $user_roles) {
 
 			return new Sentry($user_roles);
 		});
 
-		/*$this->app['sentry'] = $this->app->share(function($app)
-		{
-			return new Sentry;
-		});*/
 	}
 
 	/**
