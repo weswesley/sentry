@@ -17,7 +17,7 @@
             "src/migrations"
         ],
         "psr-4": {
-            "Wesleyalmeida\\Sentry\\": ["src/Wesleyalmeida/Sentry","tests"]
+            "Wesleyalmeida\\Sentry\\": ["src/wesleyalmeida/Sentry/","tests"]
         }
     },
     "minimum-stability": "stable"

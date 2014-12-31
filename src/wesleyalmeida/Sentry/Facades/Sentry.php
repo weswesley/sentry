@@ -5,6 +5,8 @@
  * Time: 18:29
  */
 
+namespace Wesleyalmeida\Sentry\Facades;
+
 use Illuminate\Support\Facades\Facade;
 
 class Sentry extends Facade {
