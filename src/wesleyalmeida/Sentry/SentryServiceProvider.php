@@ -29,8 +29,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function register()
-	{
+	public function register() {
 
 		App::bindShared('sentry', function($app) {
 
