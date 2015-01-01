@@ -16,6 +16,35 @@ return array (
         'guest',
         'administrator',
         'user',
-    ]
+    ],
+
+    'defaults' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Super Admin
+        |--------------------------------------------------------------------------
+        |
+        | The user role below will always have access to a resource even when not
+        | specifically defined in Sentry::requireRole();
+        |
+        */
+        'super_admin' => 'admin',
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Guest User
+        |--------------------------------------------------------------------------
+        |
+        | The user role below will always be treated as guest and be denied by
+        | default unless specifically defined by Sentry::allow($role) or its
+        | aliases.
+        |
+        */
+        'stranger' => 'guest',
+    ],
+
+
+
 
 );

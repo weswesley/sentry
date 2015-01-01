@@ -11,6 +11,7 @@ namespace Wesleyalmeida\Sentry;
 class Sentry {
 
     protected $user_roles = array();
+    protected $config     = array();
 
     public function hasRole($role) {
 
@@ -102,6 +103,10 @@ class Sentry {
         foreach($user_roles as $role) {
             $this->user_roles[] = strtolower($role);
         }
+    }
+
+    public function setConfig($config) {
+        $this->config = $config;
     }
 
 

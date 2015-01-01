@@ -33,7 +33,12 @@ class SentryServiceProvider extends ServiceProvider {
 
 		App::bindShared('sentry', function($app) {
 
-			return new Sentry;
+			$config = Config::get('wesleyalmeida::config.defaults');
+
+			$sentry = new Sentry;
+			$sentry->setConfig($config);
+
+			return $sentry;
 
 		});
 
