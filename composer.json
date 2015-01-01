@@ -20,5 +20,14 @@
             "Wesleyalmeida\\Sentry\\": ["src/wesleyalmeida/Sentry/","tests"]
         }
     },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan config:publish wesleyalmeida/sentry"
+        ],
+        "post-update-cmd": [
+        ],
+        "post-create-project-cmd": [
+        ]
+    },
     "minimum-stability": "stable"
 }

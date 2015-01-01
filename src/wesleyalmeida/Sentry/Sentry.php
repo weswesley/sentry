@@ -52,10 +52,6 @@ class Sentry {
         return json_encode($this->user_roles);
     }
 
-    public function hello() {
-        dd("Hello, I'm your Sentry");
-    }
-
     public function __call($method, $args) {
 
         if(substr($method, 0, 5) === "allow") {
