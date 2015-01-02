@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 
 class SentryServiceProvider extends ServiceProvider {
 
@@ -33,10 +34,10 @@ class SentryServiceProvider extends ServiceProvider {
 
 		App::bindShared('sentry', function($app) {
 
-			$config = Config::get('wesleyalmeida::config.defaults');
+			$defaults = Config::get('sentry::config.defaults');
 
 			$sentry = new Sentry;
-			$sentry->setConfig($config);
+			$sentry->setDefaults($defaults);
 
 			return $sentry;
 

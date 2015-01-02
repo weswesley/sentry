@@ -76,6 +76,46 @@ Controller's Action.
             dd("Bummer, I am not allowed to do this...");
         }
     }
+    
+Instead of passing a string or an array to _Sentry::requireRole()_, a developer can allow Roles by using the 
+**Sentry::allowFooRole** magic method. A third way of allowing roles is to use _Sentry::allow("foo_role")_. If the 
+developer chooses this method, then he or she can call _Sentry::requireRole()_ without any parameters.  
+
+**Example**
+
+    Sentry::allowUser();
+    Sentry::allowGuest();
+    $isAllowed = Sentry::requireRole();
+    
+is the same as 
+
+    $isAllowed = Sentry::requireRole(['user', 'guest']);
+    
+which is the same as 
+
+    Sentry::allow('user');
+    Sentry::allow('guest');
+    $isAllowed = Sentry::requireRole();
+    
+Additionally, the configuration file for this package includes the parameter _super_admin_.  The role assigned to 
+this key will **always** be allowed whenever _Sentry::requireRole()_ is invoked.  In other words, 
+_Sentry::requireRole()_ will return TRUE for users who's roles include the value that matches the value in 
+_super_admin_.
+
+**Example**
+
+    // config/packages/wesleyalmeida/sentry/config.php
+        'super_admin' => 'admin',
+    
+    
+    // login action
+        // User Roles
+        $user_roles = ['user', 'sales', 'admin']
+        // Add user roles to Sentry
+        Sentry::setUserRoles($user_roles);
+    
+    // someAction()
+        $isAllowed = Sentry::requireRole(); // returns true
 
 ## Installation
 

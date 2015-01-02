@@ -7,107 +7,173 @@
 
 namespace Wesleyalmeida\Sentry;
 
-
 class Sentry {
 
+    protected $allowed    = array();
+    protected $defaults   = array();
     protected $user_roles = array();
-    protected $config     = array();
 
-    public function hasRole($role) {
+    /**
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function hasRole($role = "") {
 
         $role = strtolower($role);
 
-        if(in_array($role, $this->user_roles)) {
-
+        if (in_array($role, $this->user_roles)) {
+            $this->clearAllowed();
             return true;
         }
-
+        $this->clearAllowed();
         return false;
     }
 
-    public function requireRole($role) {
-        if(is_array($role)) {
-            foreach($role as $value) {
-                $hasRole = $this->hasRole($value);
+    /**
+     * @param mixed $roles
+     *
+     * @return bool
+     */
+    public function requireRole($roles = "") {
 
-                if ($hasRole) {
-                    return true;
-                }
-            }
+        if (is_array($roles)) {
+            $allowed = array_merge($this->allowed, $roles);
         } else {
-            return $this->hasRole($role);
+            $allowed   = $this->allowed;
+            $allowed[] = $roles;
+        }
+
+        foreach ($allowed as $role) {
+            $hasRole = $this->hasRole($role);
+            if ($hasRole) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    public function roles() {
-        return $this->getRoles();
+
+    /**
+     * @param mixed $roles
+     *
+     * @return bool
+     */
+    public function isAllowed($roles = "") {
+
+        return $this->requireRole($roles);
     }
 
-    public function getRoles() {
+    /**
+     * @return array
+     */
+    public function getUserRoles() {
         return $this->user_roles;
     }
 
+    /**
+     * @return array
+     */
+    public function getAllowed() {
+        return $this->allowed;
+    }
+
+    /**
+     * @return string
+     */
     public function toJson() {
         return json_encode($this->user_roles);
     }
 
+    /**
+     * @param $method
+     * @param $args
+     *
+     * @return bool
+     * @throws \Exception
+     */
     public function __call($method, $args) {
 
-        if(substr($method, 0, 5) === "allow") {
+        if (substr($method, 0, 5) === "allow") {
 
             $property = strtolower(substr($method, 5));
 
             return $this->allow($property);
         }
 
-        if(substr($method, 0, 8) === "disallow") {
-            $property = strtolower(substr($method, 8));
+        if (substr($method, 0, 4) === "deny") {
+            $property = strtolower(substr($method, 4));
 
-            return $this->disallow($property);
+            return $this->deny($property);
         }
 
         throw new \Exception("$method function does not exist");
 
     }
 
+    /**
+     * @param string $allow
+     *
+     * @return bool
+     */
     public function allow($allow) {
 
-        $this->user_roles[] = $allow;
+        $this->allowed[] = $allow;
 
         return true;
     }
 
-    public function disallow($property) {
-        $key = array_search($property, $this->user_roles);
+    /**
+     * @param string $property
+     *
+     * @return bool
+     */
+    public function deny($deny) {
+        $key = array_search($deny, $this->allowed);
 
-        unset($this->user_roles[$key]);
+        if ($key) {
+            unset($this->allowed[$key]);
+        }
 
-        $this->user_roles = array_values($this->user_roles);
+        $this->allowed = array_values($this->allowed);
 
         return true;
     }
 
-    public function prevent($property) {
-
-        return $this->disallow($property);
-
-    }
-
+    /**
+     * @param array $user_roles
+     *
+     * @throws \Exception
+     */
     public function setUserRoles($user_roles) {
-        if(!is_array($user_roles)) {
+        if (!is_array($user_roles)) {
             throw new \Exception("Invalid user roles. Sentry requires an array.");
         }
 
-        foreach($user_roles as $role) {
+        foreach ($user_roles as $role) {
             $this->user_roles[] = strtolower($role);
         }
     }
 
-    public function setConfig($config) {
-        $this->config = $config;
+    /**
+     * @param array $defaults
+     */
+    public function setDefaults($defaults) {
+        $this->defaults = $defaults;
+
+        $this->allow(strtolower($defaults['super_admin']));
+
     }
 
+    /**
+     * Resets the allowed roles to the defaults
+     */
+    public function clearAllowed() {
+
+        $this->allowed = [];
+
+        $this->allow($this->defaults['super_admin']);
+    }
 
 }
