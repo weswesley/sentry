@@ -163,7 +163,6 @@ class Sentry {
         $this->defaults = $defaults;
 
         $this->allow(strtolower($defaults['super_admin']));
-
     }
 
     /**
