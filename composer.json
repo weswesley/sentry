@@ -22,12 +22,8 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
+        "post-package-install": [
             "php artisan config:publish wesleyalmeida/sentry"
-        ],
-        "post-update-cmd": [
-        ],
-        "post-create-project-cmd": [
         ]
     },
     "minimum-stability": "stable"
