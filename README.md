@@ -24,9 +24,11 @@ information is immediately after the user has been authorized in your applicatio
         if(Auth::attempt($credentials)) {
 
             // Retrieve SentryUserRoles from storage
-            // Below is the Eloquent way, but you can use
+            // Below is the Query way, but you can use
             // any other database driver.
-            $user_roles = TODO::
+            $table = DB::table('sentry_user_roles');
+            $query = $table->where('user_id', "=", $user_id);
+            $user_roles $query->lists('role');
             
             // Add user roles to Sentry
             Sentry::setUserRoles($user_roles);
@@ -38,7 +40,6 @@ information is immediately after the user has been authorized in your applicatio
             
             // Fail Authentication
             return Redirect::route('login');
-            
         }
     }
     
@@ -127,6 +128,10 @@ _super_admin_.
     "repositories": [
         { "type": "vcs", "url": "git@github.com:wesleyalmeida/sentry.git" }
     ],
+    
+### Configuration File
+    
+    php artisan config:publish wesleyalmeida/sentry"
 
 ### Database Table 
 
