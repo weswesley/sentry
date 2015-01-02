@@ -2,6 +2,7 @@
     "name": "wesleyalmeida/sentry",
     "description": "Simple Laravel Resource Access Control",
     "keywords": ["access control", "laravel", "basic", "acl", "rbac"],
+    "license": "Apache-2.0",
     "type": "package",
     "authors": [
         {
