@@ -124,7 +124,7 @@ _super_admin_.
 provides them to _Sentry_.  Underscores are not converted to camelCase. Therefore, _salesAdmin_ is the same as 
 _salesadmin_, but neither are the same as _sales_admin_.
   
-2. _Sentry_ uses the Session to store the user roles.  If you want to store the user roles in the Auth::user() 
+2. _Sentry_ uses Laravel's _Session_ to store the user roles.  If you want to store the user roles in the Auth::user() 
 object, you can do so by adding the following method to the User object that your UserProvider class demands
 
 **Sample**
