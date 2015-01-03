@@ -119,6 +119,7 @@ _super_admin_.
         $isAllowed = Sentry::requireRole(); // returns true
         
 **Final Note**
+
 1. The user roles are not case sensitive.  All user roles are normalized to lowercase as soon as the developer 
 provides them to _Sentry_.  Underscores are not converted to camelCase. Therefore, _salesAdmin_ is the same as 
 _salesadmin_, but neither are the same as _sales_admin_.
