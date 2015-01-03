@@ -117,6 +117,30 @@ _super_admin_.
     
     // someAction()
         $isAllowed = Sentry::requireRole(); // returns true
+        
+**Final Note**
+1. The user roles are not case sensitive.  All user roles are normalized to lowercase as soon as the developer 
+provides them to _Sentry_.  Underscores are not converted to camelCase. Therefore, _salesAdmin_ is the same as 
+_salesadmin_, but neither are the same as _sales_admin_.
+  
+2. _Sentry_ uses the Session to store the user roles.  If you want to store the user roles in the Auth::user() 
+object, you can do so by adding the following method to the User object that your UserProvider class demands
+
+**Sample**
+
+    // Eloquent User
+    public function roles() {
+        $this->hasMany('SentryUserRoles', 'user_id', 'id); // SentryUserRoles must also be an Eloquent model
+    }
+    
+    // Using QueryBuilder
+    public function roles() {
+        $table = DB::table('sentry_user_roles');
+        
+        $query = $table->where('user_id', "=", $user_id);
+
+        return $query->lists('role');
+    }
 
 ## Installation
 
