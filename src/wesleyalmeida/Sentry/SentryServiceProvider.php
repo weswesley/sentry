@@ -34,7 +34,7 @@ class SentryServiceProvider extends ServiceProvider {
 
 		App::bindShared('sentry', function($app) {
 
-			$defaults = Config::get('sentry::defaults');
+			$defaults = Config::get('sentry::sentry.defaults');
 
 			$sentry = new Sentry;
 			$sentry->setDefaults($defaults);
