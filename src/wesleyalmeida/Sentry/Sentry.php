@@ -24,7 +24,7 @@ class Sentry {
 
         $role = strtolower($role);
 
-        if (in_array($role, $this->user_roles)) {
+        if (in_array($role, $this->getUserRoles())) {
             $this->clearAllowed();
             return true;
         }
@@ -93,7 +93,7 @@ class Sentry {
      * @return string
      */
     public function toJson() {
-        return json_encode($this->user_roles);
+        return json_encode($this->getUserRoles());
     }
 
     /**
