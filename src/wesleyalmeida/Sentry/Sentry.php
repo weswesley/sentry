@@ -7,6 +7,8 @@
 
 namespace Wesleyalmeida\Sentry;
 
+use Illuminate\Support\Facades\Session;
+
 class Sentry {
 
     protected $allowed    = array();
@@ -69,7 +71,15 @@ class Sentry {
      * @return array
      */
     public function getUserRoles() {
-        return $this->user_roles;
+
+        if (!empty($this->user_roles)) {
+           $user_roles = $this->user_roles;
+        } else {
+            $user_roles = Session::get('sentry_user_roles');
+            $this->user_roles = $user_roles;
+        }
+
+        return $user_roles;
     }
 
     /**
@@ -154,6 +164,8 @@ class Sentry {
         foreach ($user_roles as $role) {
             $this->user_roles[] = strtolower($role);
         }
+
+        Session::put('sentry_user_roles', $this->user_roles);
     }
 
     /**
