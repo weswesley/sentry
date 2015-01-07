@@ -79,7 +79,7 @@ Controller's Action.
     }
     
 Instead of passing a string or an array to _Sentry::requireRole()_, a developer can allow Roles by using the 
-**Sentry::allowFooRole** magic method. A third way of allowing roles is to use _Sentry::allow("foo_role")_. If the 
+_Sentry::allowFooRole_ magic method. A third way of allowing roles is to use _Sentry::allow("foo_role")_. If the 
 developer chooses this method, then he or she can call _Sentry::requireRole()_ without any parameters.  
 
 **Example**
@@ -125,7 +125,15 @@ provides them to _Sentry_.  Underscores are not converted to camelCase. Therefor
 _salesadmin_, but neither are the same as _sales_admin_.
   
 2. _Sentry_ uses Laravel's _Session_ to store the user roles.  If you want to store the user roles in the Auth::user() 
-object, you can do so by adding the following method to the User object that your UserProvider class demands
+object, you can do so by adding the following method to the User object that your UserProvider class demands. In the 
+event that the user roles expire within the Session, Sentry will throw a _SentryKeyNotFoundException_.  Catch this 
+exception and reset the user roles with: 
+
+  
+    Sentry::setUserRoles($user_roles);
+    
+    
+    
 
 **Sample**
 
