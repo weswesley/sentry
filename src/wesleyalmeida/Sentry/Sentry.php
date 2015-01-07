@@ -8,6 +8,7 @@
 namespace Wesleyalmeida\Sentry;
 
 use Illuminate\Support\Facades\Session;
+use Wesleyalmeida\Sentry\Exceptions\SentryKeyNotFoundException;
 
 class Sentry {
 
@@ -68,14 +69,20 @@ class Sentry {
     }
 
     /**
-     * @return array
+     * @return array user roles
+     * @throws SentryKeyNotFoundException
      */
     public function getUserRoles() {
 
         if (!empty($this->user_roles)) {
            $user_roles = $this->user_roles;
         } else {
-            $user_roles = Session::get('sentry_user_roles');
+            if (Session::has('sentry_user_roles')) {
+                $user_roles = Session::get('sentry_user_roles');
+            } else {
+                throw new SentryKeyNotFoundException();
+            }
+
             $this->user_roles = $user_roles;
         }
 

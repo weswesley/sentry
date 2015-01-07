@@ -1,4 +1,6 @@
-<?php namespace Wesleyalmeida\Sentry;
+<?php
+
+namespace Wesleyalmeida\Sentry;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
