@@ -26,9 +26,9 @@ information is immediately after the user has been authorized in your applicatio
             // Retrieve SentryUserRoles from storage
             // Below is the Query way, but you can use
             // any other database driver.
-            $table = DB::table('sentry_user_roles');
-            $query = $table->where('user_id', "=", $user_id);
-            $user_roles $query->lists('role');
+            $table      = DB::table('sentry_user_roles');
+            $query      = $table->where('user_id', "=", $user_id);
+            $user_roles = $query->lists('role');
             
             // Add user roles to Sentry
             Sentry::setUserRoles($user_roles);
