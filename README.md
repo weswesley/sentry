@@ -26,9 +26,9 @@ information is immediately after the user has been authorized in your applicatio
             // Retrieve SentryUserRoles from storage
             // Below is the Query way, but you can use
             // any other database driver.
-            $table = DB::table('sentry_user_roles');
-            $query = $table->where('user_id', "=", $user_id);
-            $user_roles $query->lists('role');
+            $table      = DB::table('sentry_user_roles');
+            $query      = $table->where('user_id', "=", $user_id);
+            $user_roles = $query->lists('role');
             
             // Add user roles to Sentry
             Sentry::setUserRoles($user_roles);
@@ -43,8 +43,8 @@ information is immediately after the user has been authorized in your applicatio
         }
     }
     
-Once the developer has completed loading Sentry with the user roles, the developer no longer needs to perform this 
-step.  
+Once the developer has completed loading Sentry with the user roles it is not necessary to perform this 
+step again.  
 
 Validation is simple.  The developer can perform this anywhere, but the most common use-case is probably in a 
 Controller's Action.  
